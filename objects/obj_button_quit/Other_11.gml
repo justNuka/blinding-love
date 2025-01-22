@@ -1,0 +1,1 @@
+if pressed game_end();
