@@ -113,19 +113,13 @@ switch (state) {
 }
 
 // --- RÉDUCTION DU CHAMP DE VISION ---
-// Réduction du champ de vision
 
-if (vision_radius < 0) {
-    vision_radius = 0;
-} else {
-	vision_radius -= vision_reduction_rate;
-}
+vision_radius -= vision_reduction_rate;
 
-// Empêche le rayon de descendre en dessous du minimum
 if (vision_radius < vision_min_radius) {
     vision_radius = vision_min_radius;
 
-    // Déclenche une condition de défaite si nécessaire
+    // Exemple : condition de défaite
     show_message("Vous avez perdu la vue !");
     game_restart();
 }

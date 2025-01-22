@@ -29,7 +29,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"sSlowReducVision",
+    "path":"sprites/sSlowReducVision/sSlowReducVision.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

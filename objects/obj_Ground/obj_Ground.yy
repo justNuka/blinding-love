@@ -8,8 +8,8 @@
   "name":"obj_Ground",
   "overriddenProperties":[],
   "parent":{
-    "name":"group1",
-    "path":"folders/Objects/group1.yy",
+    "name":"Game handling",
+    "path":"folders/Objects/Game handling.yy",
   },
   "parentObjectId":null,
   "persistent":true,

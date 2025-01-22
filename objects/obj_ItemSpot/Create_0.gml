@@ -1,18 +1,27 @@
-chance_none = 50;
-chance_common = 30;
-chance_uncommon = 15;
-chance_rare = 5;
+/// obj_ItemSpot - Create
 
-item_generated = noone;
+// Pourcentages actuels (à voir après) :
+//  - 25% : pas d'item
+//  - 15% : item rare (AugmentVision)
+//  - 40% : item commun (SlowVision)
+//  - 20% : item StopVision
 
-var roll = irandom(100);
+var r = irandom(99);
 
-if (roll < chance_none) {
-    item_generated = noone;
-} else if (roll < chance_none + chance_common) {
-    item_generated = instance_create_layer(x, y, "Items", obj_ItemSlowVision);
-} else if (roll < chance_none + chance_common + chance_uncommon) {
-    item_generated = instance_create_layer(x, y, "Items", obj_ItemStopVision);
-} else {
-    // Truc bizarre pas sensé arriver
+if (r < 25) {
+    // 25% : aucun item
 }
+else if (r < 25 + 15) {
+    // 15% : item AugmentVision
+    instance_create_layer(x, y, layer, obj_ItemAugmentVision);
+}
+else if (r < 25 + 15 + 40) {
+    // 40% : item SlowVision
+    instance_create_layer(x, y, layer, obj_ItemSlowVision);
+}
+else {
+    // 20% : item StopVision
+    instance_create_layer(x, y, layer, obj_ItemStopVision);
+}
+
+instance_destroy();

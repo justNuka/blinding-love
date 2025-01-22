@@ -9,8 +9,8 @@
   "name":"obj_button_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"Main menu",
-    "path":"folders/Objects/Main menu.yy",
+    "name":"Controller",
+    "path":"folders/Objects/Controller.yy",
   },
   "parentObjectId":null,
   "persistent":false,
