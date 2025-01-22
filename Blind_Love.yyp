@@ -54,7 +54,7 @@
     {"id":{"name":"obj_ItemSlowVision","path":"objects/obj_ItemSlowVision/obj_ItemSlowVision.yy",},},
     {"id":{"name":"obj_ItemSpot","path":"objects/obj_ItemSpot/obj_ItemSpot.yy",},},
     {"id":{"name":"obj_ItemStopVision","path":"objects/obj_ItemStopVision/obj_ItemStopVision.yy",},},
-    {"id":{"name":"obj_Monster","path":"objects/obj_Monster/obj_Monster.yy",},},
+    {"id":{"name":"obj_MonsterParent","path":"objects/obj_MonsterParent/obj_MonsterParent.yy",},},
     {"id":{"name":"obj_Player","path":"objects/obj_Player/obj_Player.yy",},},
     {"id":{"name":"obj_title_screen","path":"objects/obj_title_screen/obj_title_screen.yy",},},
     {"id":{"name":"obj_VisionControl","path":"objects/obj_VisionControl/obj_VisionControl.yy",},},

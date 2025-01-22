@@ -6,6 +6,6 @@ function define_states(){
 		Jumping,
 	    Attacking,
 	    Dead,
-		AllowedToExit
+		NotAllowedToExit
 	}
 }

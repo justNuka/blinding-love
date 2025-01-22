@@ -1,1 +1,0 @@
-obj_Player.state = Dead
