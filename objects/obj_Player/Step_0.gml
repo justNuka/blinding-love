@@ -14,12 +14,9 @@ if (keyboard_check(vk_shift)) {
 }
 
 var _subPixel = 0.5;
-if (place_meeting(x + xspd, y, obj_Ground)) {
-    var _pixelCheck = _subPixel * sign(xspd);
-    while (!place_meeting(x + _pixelCheck, y, obj_Ground)) {
-        x += _pixelCheck;
-    }
+if (place_meeting(x + 2*xspd, y, obj_Ground)) {
     xspd = 0;
+
 }
 x += xspd;
 
