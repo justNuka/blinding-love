@@ -23,7 +23,7 @@ x += xspd;
 // Déplacements verticaux
 yspd += grav;
 
-if (jumpKeyPressed && (place_meeting(x, y + 1, obj_Ground)||(doubleJumpAvailable && isFirstJump))) {
+if (jumpKeyPressed && ((place_meeting(x, y+1, obj_Ground) && yspd>=0)||(doubleJumpAvailable && isFirstJump))) {
 	state = State.Jumping
     yspd = jspd;
 	noCollision=true
