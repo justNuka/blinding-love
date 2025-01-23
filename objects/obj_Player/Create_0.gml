@@ -12,6 +12,7 @@ moveSpd = 6
 runSpd = 9
 xspd = 0
 yspd = 0
+noCollision = false
 
 // Gravité + sauts
 grav = 0.5

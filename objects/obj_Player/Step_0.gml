@@ -30,13 +30,14 @@ yspd += grav;
 if (jumpKeyPressed && (place_meeting(x, y + 1, obj_Ground)||(doubleJumpAvailable && isFirstJump))) {
 	state = State.Jumping
     yspd = jspd;
+	noCollision=true
 	if(!place_meeting(x, y + 1, obj_Ground)){
 		isFirstJump=false
 	}
 }
 
 var _subPixel = 0.5;
-if (place_meeting(x, y + yspd, obj_Ground)) {
+if (place_meeting(x, y + yspd, obj_Ground) && !noCollision) {
     var _pixelCheck = _subPixel * sign(yspd);
     while (!place_meeting(x, y + _pixelCheck, obj_Ground)) {
         y += _pixelCheck;
@@ -79,6 +80,7 @@ switch (state) {
     case State.Running:
         sprite_index = Elle_Run;
         image_speed = 0.5;
+		noCollision=false
 
         if (!keyboard_check(vk_shift)) {
             state = State.Walking;
@@ -108,13 +110,19 @@ switch (state) {
 		if(!jumpKeyPressed && isFirstJump) {
 			doubleJumpAvailable = true
 		}
+		if(yspd<0){
+			noCollision = true	
+		}else{
+			noCollision = false
+		}
 
-        if (place_meeting(x, y + 1, obj_Ground)) {
+        if (place_meeting(x, y + 1, obj_Ground) && !noCollision) {
 			isFirstJump= true
 			doubleJumpAvailable = false
             if (moveDir == 0) state = State.Idle;
             else state = State.Walking;
         }
+
         break;
 
     default:
