@@ -141,3 +141,15 @@ if (vision_radius < vision_min_radius) {
     show_message("Vous avez perdu la vue !");
     game_restart();
 }
+
+// --- ATTAQUE MINIMALE (FAIRE UNE HITBOX AVEC UN OBJET ATTACK
+// SI TEMPS DISPO) ---
+
+if (keyboard_check_pressed(ord("X"))) {
+    var range_attack = 60;
+    with (obj_MonsterParent) {
+        if (abs(x - other.x) < range_attack) {
+            instance_destroy();
+        }
+    }
+}
