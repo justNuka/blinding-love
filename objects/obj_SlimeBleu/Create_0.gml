@@ -2,6 +2,10 @@
 
 event_inherited();
 
-sprite_index = Slime_Idle;
+sprIdle = Slime_Idle;
+sprWalk = Slime_walk;
+sprRun = Slime_Run;
+sprDeath = Slime_Dead;
 
 speed_walk = 1.0;
+run_speed = 2.0;

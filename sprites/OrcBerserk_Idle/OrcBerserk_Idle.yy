@@ -29,8 +29,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Orc shaman",
-    "path":"folders/Sprites/Monsters/Orc shaman.yy",
+    "name":"Orc berserk",
+    "path":"folders/Sprites/Monsters/Orc berserk.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

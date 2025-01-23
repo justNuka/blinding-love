@@ -1,5 +1,10 @@
 /// obj_Berserk - Create
 event_inherited();
 
-sprite_index = OrcBerserk_Idle;
-speed_walk = 2.0;
+sprIdle = OrcBerserk_Walk;
+sprWalk = OrcBerserk_Walk;
+sprRun = OrcBerserk_Run;
+sprDeath = OrcBerserk_Dead;
+
+speed_walk = 1.5;
+speed_run = 3.0;

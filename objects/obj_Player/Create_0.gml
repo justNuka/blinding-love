@@ -1,9 +1,10 @@
 // State de base
 state = State.Idle
+attack_sprite = Elle_Attack_1 // Default au cas ou
 
 // Vision
 vision_radius = 300;
-vision_reduction_rate = 0.002;
+vision_reduction_rate = 0.05;
 vision_min_radius = 0;
 
 // Mouvements
