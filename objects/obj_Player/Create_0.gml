@@ -5,7 +5,7 @@ attack_sprite = Elle_Attack_1 // Default au cas ou
 // Vision
 vision_radius = 300;
 vision_reduction_rate = 0.05;
-vision_min_radius = 0;
+vision_min_radius = 50;
 
 // Mouvements
 moveDir = 0

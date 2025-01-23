@@ -2,7 +2,7 @@
 
 //global.monsters_alive += 1;
 state = "wander";
-obj_RoomControl.monsters_in_room ++;
+//obj_RoomControl.monsters_in_room ++;
 
 speed_walk = 1.5;
 speed_run = 2.5;

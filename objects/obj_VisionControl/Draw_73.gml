@@ -5,7 +5,7 @@ if instance_exists(obj_Player) {
     var screen_x = obj_Player.x - camera_get_view_x(cam);
     var screen_y = obj_Player.y - camera_get_view_y(cam);
 	
-	var hole_diameter_in_sprite = 33;
+	var hole_diameter_in_sprite = 25;
 
     var max_radius = 300;
     var scale = obj_Player.vision_radius / hole_diameter_in_sprite;
@@ -13,7 +13,7 @@ if instance_exists(obj_Player) {
     //if (scale > 1) scale = 1;
 
     draw_sprite_ext(
-        sReducVision2,
+        sReductionVision,
         0,
         screen_x,
         screen_y,
