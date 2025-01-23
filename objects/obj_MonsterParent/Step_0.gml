@@ -44,3 +44,9 @@ switch (state) {
         }
     break;
 }
+
+if (hdir < 0) {
+    image_xscale = -1;
+} else if (hdir > 0) {
+    image_xscale = 1;
+}

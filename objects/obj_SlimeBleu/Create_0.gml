@@ -2,6 +2,6 @@
 
 event_inherited();
 
-sprite_index = spr_SlimeBlue;
+sprite_index = Slime_Idle;
 
 speed_walk = 1.0;
