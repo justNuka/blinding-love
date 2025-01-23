@@ -1,1 +1,1 @@
-vision_reduction_rate = 0.1;
+vision_reduction_rate = 0.05;

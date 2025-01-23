@@ -1,58 +1,95 @@
 /// obj_MonsterParent - Step
 
 if !instance_exists(obj_Player) {
-    // S'il n'y a pas de player, on peut éventuellement faire rien
     exit;
 }
 
-// Distance au joueur
 var dist = point_distance(x, y, obj_Player.x, obj_Player.y);
 
 // --- Gestion de l'état ---
 switch (state) {
-    
+	case "idle":
+		sprite_index = sprIdle;
+		image_speed = 0.2;
+		
+		if (idle_timer > 0) {
+			idle_timer -= 1;
+		} else {
+			state = "wander";
+		}
+		
+		if (dist < detection_range) {
+			state = "chase";
+		}
+		break;
     case "wander":
-        // 1) On se déplace horizontalement selon hdir
+		sprite_index = sprWalk;
+		image_speed = 0.3;
+		
         if (place_free(x + hdir * speed_walk, y)) {
             x += hdir * speed_walk;
         } else {
-            // Si on se cogne, on inverse la direction
             hdir = -hdir;
         }
+		
+		if (hdir < 0) image_xscale = -1; else image_xscale =1;
+		
+		if (random(100) < 1) {
+			state = "idle";
+			idle_timer = irandom_range(30, 90);
+		}
 
-        // 2) Si le joueur est proche (< detection_range), on passe en chase
         if (dist < detection_range) {
             state = "chase";
         }
 
-        // 3) Possibilité de changer de direction aléatoirement toutes les X frames
-        //    (non indispensable, mais rend l'errance plus dynamique)
         if (random(100) < 1) {
             hdir = choose(-1, 1);
         }
-
-    break;
+	break;
 
     case "chase":
-        // Le monstre se dirige vers le joueur
-        // Simplement : si le player est à gauche, hdir = -1, à droite => +1
+	
+		sprite_index = sprRun;
+		image_speed = 0.4;
+		
         if (obj_Player.x < x) {
             hdir = -1;
         } else {
             hdir = 1;
         }
-
-        // On avance un peu plus vite quand on chase, si tu veux
-        var chase_speed = speed_walk * 1.8;
-        if (place_free(x + hdir * chase_speed, y)) {
-            x += hdir * chase_speed;
+		
+		if (hdir < 0) {
+			image_xscale = -1;
+		} else {
+			image_xscale = 1;
+		}
+	
+        if (place_free(x + hdir * speed_run, y)) {
+            x += hdir * speed_run;
         }
+		
+		if (round(x) == round(obj_Player.x)){
+			state = "idle";
+			idle_timer = 30;
+		}
 
-        // Si le joueur s'éloigne au-delà de la detection_range, on retourne errer
         if (dist > detection_range + 50) {
-            // Petit hysteresis pour éviter un on/off permanent
             state = "wander";
         }
-
     break;
+	
+	case "death":
+		sprite_index = sprDeath;
+		image_speed = 0.3;
+		
+		if (image_index >= (image_number -1)){
+			instance_destroy()
+		}
+}
+
+if (hdir < 0) {
+    image_xscale = -1;
+} else if (hdir > 0) {
+    image_xscale = 1;
 }

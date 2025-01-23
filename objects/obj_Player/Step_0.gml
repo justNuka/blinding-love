@@ -1,5 +1,4 @@
-// --- INPUTS ---
-// Récupère les entrées clavier
+// Inputs
 rightKey = keyboard_check(vk_right);
 leftKey = keyboard_check(vk_left);
 jumpKeyPressed = keyboard_check(vk_space);
@@ -7,7 +6,7 @@ RunningKeyPressed = keyboard_check(vk_shift);
 
 moveDir = rightKey - leftKey;
 
-// --- DÉPLACEMENT HORIZONTAL ---
+// Déplacements horizontaux
 if (keyboard_check(vk_shift)) {
     xspd = moveDir * runSpd;
 } else {
@@ -15,24 +14,26 @@ if (keyboard_check(vk_shift)) {
 }
 
 var _subPixel = 0.5;
-if (place_meeting(x + xspd, y, obj_Ground)) {
-    var _pixelCheck = _subPixel * sign(xspd);
-    while (!place_meeting(x + _pixelCheck, y, obj_Ground)) {
-        x += _pixelCheck;
-    }
+if (place_meeting(x + 2*xspd, y, obj_Ground)) {
     xspd = 0;
+
 }
 x += xspd;
 
-// --- DÉPLACEMENT VERTICAL ---
+// Déplacements verticaux
 yspd += grav;
 
-if (jumpKeyPressed && place_meeting(x, y + 1, obj_Ground)) {
+if (jumpKeyPressed && ((place_meeting(x, y+1, obj_Ground) && yspd>=0)||(doubleJumpAvailable && isFirstJump))) {
+	state = State.Jumping
     yspd = jspd;
+	noCollision=true
+	if(!place_meeting(x, y + 1, obj_Ground) && yspd<0){
+		isFirstJump=false
+	}
 }
 
 var _subPixel = 0.5;
-if (place_meeting(x, y + yspd, obj_Ground)) {
+if (place_meeting(x, y + yspd, obj_Ground) && !noCollision) {
     var _pixelCheck = _subPixel * sign(yspd);
     while (!place_meeting(x, y + _pixelCheck, obj_Ground)) {
         y += _pixelCheck;
@@ -41,7 +42,7 @@ if (place_meeting(x, y + yspd, obj_Ground)) {
 }
 y += yspd;
 
-// --- LOGIQUE D'ÉTATS ---
+// Les états du player
 switch (state) {
     case State.Idle:
         sprite_index = Elle_Idle;
@@ -87,7 +88,7 @@ switch (state) {
         if (!place_meeting(x, y + 1, obj_Ground)) {
             state = State.Jumping;
         }
-
+		
         if (moveDir < 0) image_xscale = -1;
         if (moveDir > 0) image_xscale = 1;
         break;
@@ -100,19 +101,45 @@ switch (state) {
             if (moveDir < 0) image_xscale = -1;
             if (moveDir > 0) image_xscale = 1;
         }
+		
+		if(!jumpKeyPressed && isFirstJump) {
+			doubleJumpAvailable = true
+		}
+		if(yspd<0){
+			noCollision = true	
+		}else if(noCollision && !place_meeting(x, y + 1, obj_Ground)){
+			noCollision = false
+		}
 
-        if (place_meeting(x, y + 1, obj_Ground)) {
+        if (place_meeting(x, y + 1, obj_Ground) && !noCollision) {
+			isFirstJump= true
+			doubleJumpAvailable = false
             if (moveDir == 0) state = State.Idle;
             else state = State.Walking;
         }
+
         break;
+	
+	case State.Attacking:
+		attack_sprite = choose(Elle_Attack_1, Elle_Attack_2);
+        sprite_index = attack_sprite;
+		image_index = 0
+        image_speed  = 0.3;
+
+        xspd = 0; 
+
+        if (image_index >= image_number - 1) {
+            if (moveDir != 0) state = State.Walking;
+            else state = State.Idle;
+            image_index = 0;
+        }
 
     default:
         state = State.Idle;
         break;
 }
 
-// --- RÉDUCTION DU CHAMP DE VISION ---
+// Champ de vision qui se réduit
 
 vision_radius -= vision_reduction_rate;
 
@@ -121,5 +148,22 @@ if (vision_radius < vision_min_radius) {
 
     // Exemple : condition de défaite
     show_message("Vous avez perdu la vue !");
-    game_restart();
+    game_end();
+}
+
+
+// Attaque
+if (keyboard_check_pressed(vk_tab)) {
+    state = State.Attacking;
+
+    var direction_sign = image_xscale;
+    var attack_range = 150;
+
+    with (obj_MonsterParent) {
+        var dx_m = x - other.x;
+        if (direction_sign * dx_m > 0 && abs(dx_m) < attack_range) {
+            state = "death"; 
+            image_index = 0;
+        }
+    }
 }
