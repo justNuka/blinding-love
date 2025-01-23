@@ -17,3 +17,5 @@ yspd = 0
 grav = 0.5
 termVel = 4
 jspd = -10
+doubleJumpAvailable = false
+isFirstJump = true
