@@ -27,8 +27,12 @@ x += xspd;
 // --- DÉPLACEMENT VERTICAL ---
 yspd += grav;
 
-if (jumpKeyPressed && place_meeting(x, y + 1, obj_Ground)) {
+if (jumpKeyPressed && (place_meeting(x, y + 1, obj_Ground)||(doubleJumpAvailable && isFirstJump))) {
+	state = State.Jumping
     yspd = jspd;
+	if(!place_meeting(x, y + 1, obj_Ground)){
+		isFirstJump=false
+	}
 }
 
 var _subPixel = 0.5;
@@ -87,7 +91,7 @@ switch (state) {
         if (!place_meeting(x, y + 1, obj_Ground)) {
             state = State.Jumping;
         }
-
+		
         if (moveDir < 0) image_xscale = -1;
         if (moveDir > 0) image_xscale = 1;
         break;
@@ -100,8 +104,14 @@ switch (state) {
             if (moveDir < 0) image_xscale = -1;
             if (moveDir > 0) image_xscale = 1;
         }
+		
+		if(!jumpKeyPressed && isFirstJump) {
+			doubleJumpAvailable = true
+		}
 
         if (place_meeting(x, y + 1, obj_Ground)) {
+			isFirstJump= true
+			doubleJumpAvailable = false
             if (moveDir == 0) state = State.Idle;
             else state = State.Walking;
         }
