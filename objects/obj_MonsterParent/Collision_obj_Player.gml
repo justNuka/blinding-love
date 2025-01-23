@@ -1,4 +1,4 @@
-/// obj_MonsterParent - Collision with obj_Player
+/// obj_MonsterParent
 
 // other.state = State.Dead;
 // game_restart()
