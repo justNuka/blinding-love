@@ -1,0 +1,1 @@
+monsters_in_room = 0;

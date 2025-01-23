@@ -1,7 +1,7 @@
 {
   "$GMRoom":"v1",
   "%Name":"rEndingRoom",
-  "creationCodeFile":"",
+  "creationCodeFile":"rooms/rEndingRoom/RoomCreationCode.gml",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,

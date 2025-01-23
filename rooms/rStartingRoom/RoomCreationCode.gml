@@ -1,0 +1,1 @@
+//global.monsters_alive = 0
